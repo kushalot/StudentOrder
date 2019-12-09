@@ -6,8 +6,7 @@ import edu.javacourse.studentorder.domain.StudentOrder;
 
 public class SaveStudentOrder {
     public static void main(String[] args) {
-        buildStudentOrder();
-
+        buildStudentOrder(10);
 //        StudentOrder so = new StudentOrder();
   //      long ans = saveStudentOrder(so);
     //    System.out.println(ans);
@@ -21,20 +20,18 @@ public class SaveStudentOrder {
         return answer;
     }
 
-   public static StudentOrder buildStudentOrder(){
+   public static StudentOrder buildStudentOrder(long id){
         StudentOrder so = new StudentOrder();
+        so.setStudentOrderId(id);
 
-        Adult husband = new Adult();
+        StudentOrder so1 = so;
 
+        printStudentOreder(so);
 
-
-//        husband.setGivenName("Slava");
-//        husband.setSurName("Kushner");
-//        husband.setPassportNumber("123456");
-//        so.setHusband(husband);
-
-//        String ans = husband.getPersonString();
-//        System.out.println(ans);
         return so;
+    }
+
+    static void printStudentOreder(StudentOrder stOr){
+        stOr.getStudentOrderId();
     }
 }

@@ -9,11 +9,17 @@ public class CityRegisterValidator {
     protected int port;
     private String login;
     String password;
+    private RealCityRegisterChecker personChecker;
+
+    public CityRegisterValidator() {
+        personChecker = new RealCityRegisterChecker();
+    }
 
     public AnswerCityRegister checkCityRegister(StudentOrder so){
-        System.out.println("city register is running " + hostName + "," + login + "," + password);
         AnswerCityRegister ans = new AnswerCityRegister();
-        ans.success = false;
+        personChecker.checkPerson(so.getHusband());
+        personChecker.checkPerson(so.getWife());
+        personChecker.checkPerson(so.getChild());
         return ans;
     }
 }
