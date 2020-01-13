@@ -1,11 +1,18 @@
 package edu.javacourse.studentorder;
 
 import edu.javacourse.studentorder.domain.*;
+import edu.javacourse.studentorder.domain.children.AnswerChildren;
+import edu.javacourse.studentorder.domain.register.AnswerCityRegister;
+import edu.javacourse.studentorder.domain.student.AnswerStudent;
+import edu.javacourse.studentorder.domain.wedding.AnswerWedding;
 import edu.javacourse.studentorder.mail.MailSender;
 import edu.javacourse.studentorder.validator.ChildrenValidator;
 import edu.javacourse.studentorder.validator.CityRegisterValidator;
 import edu.javacourse.studentorder.validator.StudentValidator;
 import edu.javacourse.studentorder.validator.WeddingValidator;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class StudentOrderValidator {
     private CityRegisterValidator cityRegisterVal;
@@ -28,22 +35,24 @@ public class StudentOrderValidator {
     }
 
     public void checkAll(){
-        StudentOrder[] soArray = readStudentOrders();
+        List<StudentOrder> soList = readStudentOrders();
 
-        for (StudentOrder so : soArray){
+        for (StudentOrder so : soList){
             checkOneOrder(so);
         }
     }
 
-    public StudentOrder[] readStudentOrders(){
-        StudentOrder[] soArray = new StudentOrder[1];
+    public List<StudentOrder> readStudentOrders(){
+        List<StudentOrder> soList = new LinkedList<>();
 
-        for (int c = 0; c < soArray.length ; c++){
-            soArray[c] = SaveStudentOrder.buildStudentOrder(c);
+        for (int c = 0; c < 5 ; c++){
+            StudentOrder so = SaveStudentOrder.buildStudentOrder(c);
+            soList.add(so);
         }
 
-        return soArray;
+        return soList;
     }
+
 
     public void checkOneOrder(StudentOrder so){
         AnswerCityRegister cityAnswer = checkCityRegister(so);

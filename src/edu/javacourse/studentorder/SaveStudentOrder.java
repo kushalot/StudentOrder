@@ -3,14 +3,29 @@ package edu.javacourse.studentorder;
 import edu.javacourse.studentorder.domain.*;
 
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.time.LocalDate;
 
 public class SaveStudentOrder {
-    public static void main(String[] args) {
-        buildStudentOrder(10);
+    public static void main(String[] args) throws Exception {
+       // Class.forName("org.postgresql.Driver");
+        Connection con = DriverManager.getConnection(
+            "jdbc:postgresql://localhost:5432/jc_student",
+                "postgres", "postgres");
+
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM jc_street");
+        while (rs.next()){
+            System.out.println(rs.getLong(1) + " : " + rs.getString(2));
+        }
+
+//        StudentOrder s = buildStudentOrder(10);
 //        StudentOrder so = new StudentOrder();
-  //      long ans = saveStudentOrder(so);
-    //    System.out.println(ans);
+//        long ans = saveStudentOrder(so);
+//        System.out.println(ans);
 
     }
 
@@ -47,16 +62,25 @@ public class SaveStudentOrder {
        wife.setStudentId("" + (200000 + id));
        wife.setAddress(address);
        // Ребенок
-        Child child = new Child("Петрова", "Ирина", "Викторовна", LocalDate.of(2018, 6, 29));
+        Child child1 = new Child("Петрова", "Ирина", "Викторовна", LocalDate.of(2018, 6, 29));
 
-       child.setCertificateNumber("" + (300000 + id));
-       child.setIssueDate(LocalDate.of(2018, 7, 19));
-       child.setIssueDepartment("ОТдел ЗАГС №" + id);
-       child.setAddress(address);
+       child1.setCertificateNumber("" + (300000 + id));
+       child1.setIssueDate(LocalDate.of(2018, 7, 19));
+       child1.setIssueDepartment("Отдел ЗАГС №" + id);
+       child1.setAddress(address);
+
+       // Ребенок
+       Child child2 = new Child("Петров", "Евгений", "Викторович", LocalDate.of(2018, 6, 29));
+
+       child2.setCertificateNumber("" + (400000 + id));
+       child2.setIssueDate(LocalDate.of(2018, 7, 19));
+       child2.setIssueDepartment("Отдел ЗАГС №" + id);
+       child2.setAddress(address);
 
        so.setHusband(husband);
        so.setWife(wife);
-       so.setChild(child);
+       so.addChild(child1);
+       so.addChild(child2);
 
        return so;
     }
