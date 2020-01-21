@@ -4,7 +4,6 @@ import edu.javacourse.studentorder.dao.DictionaryDao;
 import edu.javacourse.studentorder.dao.DictionaryDaoImpl;
 import edu.javacourse.studentorder.domain.*;
 
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
