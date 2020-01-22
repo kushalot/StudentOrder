@@ -17,7 +17,6 @@ public class SaveStudentOrder {
             for (Street s : d){
                 System.out.println(s.getStreetName());
             }
-
 //        StudentOrder s = buildStudentOrder(10);
 //        StudentOrder so = new StudentOrder();
 //        long ans = saveStudentOrder(so);
